@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { 
   Sparkles, Target, TrendingUp, Calendar, 
   Zap, Shield, Brain, Users, 
-  BarChart3, FileText, MessageSquare, Award 
+  BarChart3
 } from 'lucide-react'
 
 const features = [

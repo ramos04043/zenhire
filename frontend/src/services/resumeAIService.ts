@@ -1,7 +1,6 @@
+import { API_BASE } from '../lib/api'
 import { zendbx } from '../lib/zendbx'
 import { zendbxService } from './ZendBXService'
-
-const ZENHIRE_API_BASE = '/local-api'
 
 export interface AIResumeAnalysis {
   atsScore: number
@@ -67,7 +66,7 @@ class ResumeAIService {
     const headers: HeadersInit = {}
     if (token) headers['Authorization'] = `Bearer ${token}`
 
-    const response = await fetch(`${ZENHIRE_API_BASE}/resumes/upload`, {
+    const response = await fetch(`${API_BASE}/resumes/upload`, {
       method: 'POST',
       headers,
       body: formData,
@@ -119,3 +118,4 @@ class ResumeAIService {
 }
 
 export const resumeAIService = new ResumeAIService()
+

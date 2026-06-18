@@ -58,7 +58,7 @@ const RealTimeAIAnalyzer = () => {
     }
   ])
 
-  const [isAnalyzing, setIsAnalyzing] = useState(true)
+  const [isAnalyzing] = useState(true)
   const [lastUpdate, setLastUpdate] = useState(new Date())
 
   // Simulate real-time data updates

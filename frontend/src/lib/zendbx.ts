@@ -1,10 +1,12 @@
 import { createClient } from '@zendbx/sdk'
 
-// ZendBX Client Configuration - use Vite proxy URL for local development
-const projectId = import.meta.env.VITE_ZENDBX_PROJECT_ID
+const projectId   = import.meta.env.VITE_ZENDBX_PROJECT_ID
 const projectSlug = import.meta.env.VITE_ZENDBX_PROJECT_SLUG
-// Use full URL (including origin) with proxy path for SDK compatibility
-const apiUrl = `${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173'}/api-proxy`
+
+// Dev: /api-proxy (Vite proxies it) | Prod: full ZendBX URL via env var
+const apiUrl =
+  import.meta.env.VITE_ZENDBX_API_URL ||
+  `${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173'}/api-proxy`
 
 export const zendbx = createClient({
   apiUrl,

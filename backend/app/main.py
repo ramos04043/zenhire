@@ -25,9 +25,17 @@ async def global_exception_handler(request: Request, exc: Exception):
         }
     )
 
+import os
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "http://localhost:3000"],
+    allow_origins=[
+        "http://localhost:5173",
+        "http://localhost:3000",
+        # Production — set ALLOWED_ORIGINS env var as comma-separated list
+        # e.g. https://zenhire.vercel.app,https://www.zenhire.in
+        *[o.strip() for o in os.getenv("ALLOWED_ORIGINS", "").split(",") if o.strip()],
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { Mail, Linkedin, Building, MapPin, Phone, Briefcase } from 'lucide-react'
+import { Mail, Linkedin, Building, MapPin, Phone } from 'lucide-react'
 
 const RecruiterProfile = () => {
   const recruiter = {

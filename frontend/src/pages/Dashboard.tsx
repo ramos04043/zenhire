@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { Sparkles, TrendingUp, Calendar } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
 import { useDataStore } from '../store/dataStore'
@@ -15,7 +15,6 @@ import LiveActivityChart from '../components/dashboard/LiveActivityChart'
 const Dashboard = () => {
   const applications = useDataStore(state => state.applications)
   const jobs = useDataStore(state => state.jobs)
-  const savedJobs = useDataStore(state => state.savedJobs)
   const resumes = useDataStore(state => state.resumes)
   const { user } = useAuthStore()
 

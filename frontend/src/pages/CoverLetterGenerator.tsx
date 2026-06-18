@@ -1,3 +1,4 @@
+import { API_BASE } from '../lib/api'
 import { useState } from 'react'
 import DashboardLayout from '../components/DashboardLayout'
 import {
@@ -42,7 +43,7 @@ const CoverLetterGenerator = () => {
     setCoverLetter('')
     toast.loading('Writing your cover letter…', { id: 'cl' })
     try {
-      const resp = await fetch('/local-api/cover-letter/generate', {
+      const resp = await fetch(`${API_BASE}/cover-letter/generate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

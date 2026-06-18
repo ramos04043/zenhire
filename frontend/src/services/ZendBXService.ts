@@ -1,4 +1,4 @@
-import { zendbx, TABLES, type User, type Profile, type Resume, type Application, type Job, type SavedJob, type Notification, type Settings } from '../lib/zendbx'
+import { zendbx, TABLES, type Profile, type Resume, type Application, type SavedJob, type Notification, type Settings } from '../lib/zendbx'
 
 /**
  * Helper function to extract human-readable error message from error objects
@@ -36,19 +36,14 @@ function extractErrorMessage(error: any): string {
 class ZendBXService {
   // ============= Authentication =============
   
-  async signUp(email: string, password: string, fullName?: string) {
+  async signUp(email: string, password: string, _fullName?: string) {
     const { data, error } = await zendbx.auth.signUp({
       email,
       password,
-      options: {
-        data: {
-          full_name: fullName,
-          role: 'candidate'
-        }
-      }
-    })
+    } as any)
 
     if (error) throw error
+    if (!data) throw new Error('Auth failed')
     
     // Create initial profile and settings for new user
     if (data.user) {
@@ -67,6 +62,7 @@ class ZendBXService {
     })
 
     if (error) throw error
+    if (!data) throw new Error('Auth failed')
 
     if (data.user) {
       // Use profile table for login count to ensure compatibility with ZendBX cloud
@@ -110,15 +106,17 @@ class ZendBXService {
   }
   
   async getSession() {
-    const { data, error } = await zendbx.auth.getSession()
+    const result = await zendbx.auth.getSession()
+    const session = result?.data?.session
+    const error = (result as any)?.error
     if (error) throw error
-    return data.session
+    return session
   }
   
   async getUser() {
-    const { data: { user }, error } = await zendbx.auth.getUser()
-    if (error) return null
-    return user
+    const { data: userData } = await (zendbx.auth as any).getUser()
+    const user = userData?.user
+    return user || null
   }
 
   async getUserExtendedData(userId: string) {
@@ -381,8 +379,8 @@ class ZendBXService {
       
       if (data && data.length > 0) {
         return [...data].sort((a, b) => {
-          const dateA = a.created_at ? new Date(a.created_at).getTime() : 0
-          const dateB = b.created_at ? new Date(b.created_at).getTime() : 0
+          const dateA = a.created_at ? new Date(a.created_at as string).getTime() : 0
+          const dateB = b.created_at ? new Date(b.created_at as string).getTime() : 0
           return dateB - dateA
         })
       }
@@ -454,8 +452,8 @@ class ZendBXService {
       
       if (data && data.length > 0) {
         return [...data].sort((a, b) => {
-          const dateA = a.created_at ? new Date(a.created_at).getTime() : 0
-          const dateB = b.created_at ? new Date(b.created_at).getTime() : 0
+          const dateA = a.created_at ? new Date(a.created_at as string).getTime() : 0
+          const dateB = b.created_at ? new Date(b.created_at as string).getTime() : 0
           return dateB - dateA
         })
       }
@@ -522,8 +520,8 @@ class ZendBXService {
     }
     
     applications.forEach(app => {
-      if (app.status in stats.by_status) {
-        stats.by_status[app.status as keyof typeof stats.by_status]++
+      if ((app as any).status in stats.by_status) {
+        stats.by_status[(app as any).status as keyof typeof stats.by_status]++
       }
     })
     
@@ -547,8 +545,8 @@ class ZendBXService {
       // Sort in memory if needed, to avoid 500 errors if column is missing
       if (data && data.length > 0) {
         return [...data].sort((a, b) => {
-          const dateA = a.posted_date ? new Date(a.posted_date).getTime() : 0
-          const dateB = b.posted_date ? new Date(b.posted_date).getTime() : 0
+          const dateA = a.posted_date ? new Date(a.posted_date as string).getTime() : 0
+          const dateB = b.posted_date ? new Date(b.posted_date as string).getTime() : 0
           return dateB - dateA
         })
       }
@@ -586,8 +584,8 @@ class ZendBXService {
       
       if (data && data.length > 0) {
         return [...data].sort((a, b) => {
-          const dateA = a.created_at ? new Date(a.created_at).getTime() : 0
-          const dateB = b.created_at ? new Date(b.created_at).getTime() : 0
+          const dateA = a.created_at ? new Date(a.created_at as string).getTime() : 0
+          const dateB = b.created_at ? new Date(b.created_at as string).getTime() : 0
           return dateB - dateA
         })
       }
@@ -639,8 +637,8 @@ class ZendBXService {
       
       if (data && data.length > 0) {
         return [...data].sort((a, b) => {
-          const dateA = a.created_at ? new Date(a.created_at).getTime() : 0
-          const dateB = b.created_at ? new Date(b.created_at).getTime() : 0
+          const dateA = a.created_at ? new Date(a.created_at as string).getTime() : 0
+          const dateB = b.created_at ? new Date(b.created_at as string).getTime() : 0
           return dateB - dateA
         })
       }

@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
-import { TrendingUp, Target, Award, Zap, ArrowUp, ArrowDown, Briefcase, DollarSign } from 'lucide-react'
+import { TrendingUp, Award, Zap, ArrowUp, ArrowDown, Briefcase, DollarSign } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
-import { Line, Bar, Radar } from 'recharts'
 
 const CareerInsights = () => {
   const stats = {
@@ -11,14 +10,7 @@ const CareerInsights = () => {
     interviewRate: { current: 34, change: 5, trend: 'up' }
   }
 
-  const applicationTrend = [
-    { month: 'Jan', applications: 12, interviews: 4 },
-    { month: 'Feb', applications: 18, interviews: 6 },
-    { month: 'Mar', applications: 15, interviews: 5 },
-    { month: 'Apr', applications: 22, interviews: 8 },
-    { month: 'May', applications: 28, interviews: 10 },
-    { month: 'Jun', applications: 24, interviews: 9 }
-  ]
+
 
   const insights = [
     {

@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { Target, Plus, CheckCircle, Clock, TrendingUp } from 'lucide-react'
+import { Target, Plus, CheckCircle, Clock } from 'lucide-react'
 
 const CareerGoals = () => {
   const goals = [

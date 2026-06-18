@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { Plus, ExternalLink, Github, Globe, Star, Eye } from 'lucide-react'
+import { Plus, ExternalLink, Github, Star, Eye } from 'lucide-react'
 
 const Portfolio = () => {
   const projects = [

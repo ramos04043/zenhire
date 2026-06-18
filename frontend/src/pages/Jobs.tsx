@@ -1,3 +1,4 @@
+import { API_BASE } from '../lib/api'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -61,7 +62,7 @@ const Jobs = () => {
     setIsSearchingJobs(true)
     toast.loading('Searching LinkedIn, Indeed & more…', { id: 'refresh' })
     try {
-      const resp = await fetch('/local-api/jobs/search', {
+      const resp = await fetch(`${API_BASE}/jobs/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

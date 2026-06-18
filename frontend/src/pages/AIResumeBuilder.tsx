@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { Sparkles, Download, Eye, FileText } from 'lucide-react'
+import { Sparkles, Download, Eye } from 'lucide-react'
 
 const AIResumeBuilder = () => {
   return (

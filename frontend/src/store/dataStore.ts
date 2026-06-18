@@ -127,7 +127,7 @@ export const useDataStore = create<DataState>((set, get) => ({
     set({ resumes: [resume, ...get().resumes] })
   },
   
-  setJobPreferences: async (userId, preferences) => {
+  setJobPreferences: async (_userId, preferences) => {
     try {
       set({ jobPreferences: preferences })
       toast.success('Preferences saved!')
@@ -143,7 +143,7 @@ export const useDataStore = create<DataState>((set, get) => ({
     }
   },
   
-  fetchJobPreferences: async (userId) => {
+  fetchJobPreferences: async (_userId) => {
     // For now, we'll fetch nothing, just keep it as is for now
     set({ jobPreferences: null })
   },
@@ -151,7 +151,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   fetchResumes: async (userId) => {
     try {
       const resumes = await zendbxService.getResumes(userId)
-      set({ resumes: Array.isArray(resumes) ? resumes : [] })
+      set({ resumes: Array.isArray(resumes) ? resumes as any[] : [] })
     } catch (error) {
       console.error('Error fetching resumes:', error)
       set({ resumes: [] })
@@ -166,7 +166,7 @@ export const useDataStore = create<DataState>((set, get) => ({
         applied_date: app.applied_date || new Date().toISOString()
       })
       if (newApp) {
-        set({ applications: [newApp, ...get().applications] })
+        set({ applications: [newApp as unknown as Application, ...get().applications] })
         toast.success('Application added')
       }
     } catch (error) {
@@ -179,7 +179,7 @@ export const useDataStore = create<DataState>((set, get) => ({
       const updatedApp = await zendbxService.updateApplication(id, updates)
       if (updatedApp) {
         set({
-          applications: get().applications.map(app => app.id === id ? updatedApp : app)
+          applications: get().applications.map(app => app.id === id ? updatedApp as unknown as Application : app)
         })
         toast.success('Application updated')
       }
@@ -203,7 +203,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   fetchApplications: async (userId) => {
     try {
       const applications = await zendbxService.getApplications(userId)
-      set({ applications: Array.isArray(applications) ? applications : [] })
+      set({ applications: Array.isArray(applications) ? applications as any[] : [] })
     } catch (error) {
       console.error('Error fetching applications:', error)
       set({ applications: [] })
@@ -213,7 +213,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   fetchJobs: async () => {
     try {
       const jobs = await zendbxService.getJobs()
-      set({ jobs: Array.isArray(jobs) ? jobs : [] })
+      set({ jobs: Array.isArray(jobs) ? (jobs as unknown as Job[]) : [] })
     } catch (error) {
       console.error('Error fetching jobs:', error)
       set({ jobs: [] })
@@ -293,7 +293,7 @@ export const useDataStore = create<DataState>((set, get) => ({
 
   saveJob: async (userId, jobId) => {
     try {
-      const savedJob = await zendbxService.saveJob({ user_id: userId, job_id: jobId })
+      const savedJob = await zendbxService.saveJob({ user_id: userId, job_id: jobId } as any)
       if (savedJob) {
         set({ savedJobs: [...get().savedJobs, jobId] })
         toast.success('Job saved')
@@ -334,9 +334,9 @@ export const useDataStore = create<DataState>((set, get) => ({
       const newNotification = await zendbxService.createNotification({
         ...notification,
         user_id: userId
-      })
+      } as any)
       if (newNotification) {
-        set({ notifications: [newNotification, ...get().notifications] })
+        set({ notifications: [newNotification as any, ...get().notifications] })
       }
     } catch (error) {
       console.error('Failed to create notification:', error)
@@ -368,7 +368,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   fetchNotifications: async (userId) => {
     try {
       const notifications = await zendbxService.getNotifications(userId)
-      set({ notifications: Array.isArray(notifications) ? notifications : [] })
+      set({ notifications: Array.isArray(notifications) ? notifications as any[] : [] })
     } catch (error) {
       console.error('Error fetching notifications:', error)
       set({ notifications: [] })
@@ -392,9 +392,9 @@ export const useDataStore = create<DataState>((set, get) => ({
       const settings = await zendbxService.getSettings(userId)
       if (settings) {
         set({ settings: {
-          demo_mode_enabled: settings.demo_mode_enabled,
-          email_notifications: settings.email_notifications,
-          push_notifications: settings.push_notifications
+          demo_mode_enabled: settings.demo_mode_enabled as boolean,
+          email_notifications: settings.email_notifications as boolean,
+          push_notifications: settings.push_notifications as boolean
         }})
       }
     } catch (error) {

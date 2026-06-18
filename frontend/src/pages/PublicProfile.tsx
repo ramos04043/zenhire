@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { MapPin, Mail, Globe, Linkedin, Github, Briefcase, GraduationCap, Award } from 'lucide-react'
+import { MapPin, Mail, Globe, Briefcase, GraduationCap } from 'lucide-react'
 
 const PublicProfile = () => {
   return (

@@ -6,12 +6,9 @@ import {
   TrendingUp, Filter, Search, X
 } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
-import { useDataStore } from '../store/dataStore'
-import { useAuthStore } from '../store/authStore'
 import toast from 'react-hot-toast'
 
 const SavedJobs = () => {
-  const { user } = useAuthStore()
   const [savedJobs, setSavedJobs] = useState<any[]>([])
   const [filteredJobs, setFilteredJobs] = useState<any[]>([])
   const [searchTerm, setSearchTerm] = useState('')
@@ -114,7 +111,7 @@ const SavedJobs = () => {
     toast.success('Job removed from saved')
   }
 
-  const handleApply = (jobId: string) => {
+  const handleApply = (_jobId: string) => {
     toast.success('Redirecting to application...')
     // Navigate to application flow
   }

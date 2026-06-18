@@ -388,7 +388,7 @@ export default function ResumeOptimization() {
                           className="flex items-center gap-1.5 px-3 py-2 bg-[#1a1a1a] border border-[#252525] hover:border-[#f97316]/40 rounded-xl text-xs font-semibold text-[#999] hover:text-white transition-colors">
                           <Download size={13} /> MD
                         </button>
-                        <button onClick={() => { resumeOptimizationService.downloadHTML(currentResult.optimizedResumeMarkdown, currentJob?.company || 'resume', currentJob?.title || ''); toast.success('Downloaded') }}
+                        <button onClick={() => { resumeOptimizationService.downloadHTML(currentResult.optimizedResumeMarkdown, currentJob?.company || 'resume', currentJob?.company || '', currentJob?.title || ''); toast.success('Downloaded') }}
                           className="flex items-center gap-1.5 px-3 py-2 bg-[#f97316] hover:bg-[#ea6a0f] rounded-xl text-xs font-bold text-white transition-colors">
                           <Download size={13} /> HTML
                         </button>

@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { Sparkles, TrendingUp, MapPin, DollarSign, Briefcase } from 'lucide-react'
+import { Sparkles, TrendingUp, MapPin, DollarSign } from 'lucide-react'
 
 const AIJobMatch = () => {
   const matches = [

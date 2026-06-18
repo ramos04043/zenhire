@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { 
-  TrendingUp, CheckCircle2, Clock, AlertCircle, 
+  TrendingUp, CheckCircle2, Clock,
   Sparkles, Target, BarChart3, Calendar 
 } from 'lucide-react'
 

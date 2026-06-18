@@ -1,16 +1,13 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import {
-  Bell, Check, Trash2, Filter, CheckCheck, Zap, Briefcase,
+  Bell, Check, Trash2, CheckCheck, Briefcase,
   FileText, Star, Users, X, Search
 } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
-import { useDataStore } from '../store/dataStore'
-import { useAuthStore } from '../store/authStore'
 import toast from 'react-hot-toast'
 
 const Notifications = () => {
-  const { user } = useAuthStore()
   const [notifications, setNotifications] = useState<any[]>([
     {
       id: '1',

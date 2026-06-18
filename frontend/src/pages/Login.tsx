@@ -26,7 +26,7 @@ const Login = () => {
     setIsLoading(true)
     
     try {
-      await login(email, password, remember)
+      await login(email, password)
       navigate('/dashboard')
     } catch (error) {
       console.error(error)

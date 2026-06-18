@@ -3,7 +3,7 @@ import DashboardLayout from '../components/DashboardLayout'
 import { Bell, Plus, Search, MapPin, Briefcase, DollarSign, Clock, Edit2, Trash2, ToggleLeft, ToggleRight } from 'lucide-react'
 
 const JobAlerts = () => {
-  const [showCreateModal, setShowCreateModal] = useState(false)
+  const [_showCreateModal, setShowCreateModal] = useState(false)
 
   const alerts = [
     {

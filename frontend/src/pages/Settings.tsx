@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Moon, Sun, Bell, Download, Trash2 } from 'lucide-react'
+import { Moon, Sun, Download, Trash2 } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
 import { useThemeStore } from '../store/themeStore'
 import { useDataStore } from '../store/dataStore'
 import { useAuthStore } from '../store/authStore'
-import toast from 'react-hot-toast'
 
 const Settings = () => {
   const theme = useThemeStore(state => state.theme)

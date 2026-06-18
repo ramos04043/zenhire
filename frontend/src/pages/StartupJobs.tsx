@@ -12,7 +12,7 @@ import {
   Heart,
   Zap
 } from 'lucide-react';
-import api from '../lib/api';
+import { API_BASE } from '../lib/api';
 
 interface StartupJob {
   id: string;
@@ -93,9 +93,14 @@ const StartupJobs: React.FC = () => {
         max_team_size: filters.maxTeamSize
       };
 
-      const response = await api.post('/startup-jobs/search', profile);
+      const response = await fetch(`${API_BASE}/startup-jobs/search`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(profile),
+      });
+      const responseData = await response.json();
       
-      let jobsList = response.data.jobs;
+      let jobsList = responseData.jobs;
 
       // Apply frontend filters
       if (filters.ycOnly) {
@@ -114,8 +119,8 @@ const StartupJobs: React.FC = () => {
 
       setStats({
         total: jobsList.length,
-        startups: response.data.startup_count,
-        ycCompanies: response.data.yc_company_count,
+        startups: responseData.startup_count,
+        ycCompanies: responseData.yc_company_count,
         avgMatchScore: Math.round(avgScore)
       });
 

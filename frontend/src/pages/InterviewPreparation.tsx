@@ -1,3 +1,4 @@
+import { API_BASE } from '../lib/api'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import DashboardLayout from '../components/DashboardLayout'
@@ -68,7 +69,7 @@ const InterviewPreparation = () => {
     setEvaluation(null)
     toast.loading('Generating questions…', { id: 'gen' })
     try {
-      const resp = await fetch('/local-api/interview-prep/questions', {
+      const resp = await fetch(`${API_BASE}/interview-prep/questions`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -95,7 +96,7 @@ const InterviewPreparation = () => {
     setEvaluating(true)
     toast.loading('Evaluating…', { id: 'eval' })
     try {
-      const resp = await fetch('/local-api/interview-prep/evaluate', {
+      const resp = await fetch(`${API_BASE}/interview-prep/evaluate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -2,18 +2,17 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
-  User, MapPin, Mail, Phone, Linkedin, Github, Globe,
+  MapPin, Mail, Phone, Linkedin, Github, Globe,
   Briefcase, GraduationCap, Award, FileText, Star, Edit,
   Camera, ExternalLink, TrendingUp
 } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
 import { useAuthStore } from '../store/authStore'
 import { useDataStore } from '../store/dataStore'
-import toast from 'react-hot-toast'
 
 const Profile = () => {
   const { user } = useAuthStore()
-  const { resumes, applications } = useDataStore()
+  const { applications } = useDataStore()
   const [activeTab, setActiveTab] = useState('overview')
 
   const profileData = {

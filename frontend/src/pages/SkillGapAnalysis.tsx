@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { TrendingUp, CheckCircle, XCircle, ArrowRight, BookOpen, Award } from 'lucide-react'
+import { CheckCircle, XCircle, ArrowRight } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
 
 const SkillGapAnalysis = () => {

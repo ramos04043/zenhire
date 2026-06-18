@@ -1,10 +1,10 @@
+import { API_BASE } from '../lib/api'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import {
   CheckCircle, ChevronRight, ChevronLeft, Sparkles,
-  Briefcase, MapPin, Layers, DollarSign, Clock,
-  Building2, Globe, X, Plus, Zap, Loader2
+  X, Plus, Zap, Loader2
 } from 'lucide-react'
 import { useOnboardingStore, type CandidateProfile } from '../store/onboardingStore'
 import toast from 'react-hot-toast'
@@ -31,19 +31,6 @@ const EMP_TYPES = ['full-time', 'internship', 'contract', 'freelance', 'part-tim
 const INDUSTRIES = ['AI', 'SaaS', 'FinTech', 'Healthcare', 'Gaming', 'EdTech', 'Cybersecurity', 'Cloud', 'E-commerce', 'Blockchain', 'Robotics', 'Media']
 const TOP_COMPANIES = ['Google', 'Amazon', 'Microsoft', 'Meta', 'Apple', 'Netflix', 'OpenAI', 'Anthropic', 'Stripe', 'Airbnb', 'Zoho', 'Freshworks', 'No Preference']
 const SALARY_MARKS = [4, 6, 8, 10, 12, 15, 18, 25, 30, 40, 50]
-
-const STEPS = [
-  { label: 'Job Title',      icon: Briefcase },
-  { label: 'Work Mode',      icon: Globe },
-  { label: 'Location',       icon: MapPin },
-  { label: 'Experience',     icon: Layers },
-  { label: 'Salary',         icon: DollarSign },
-  { label: 'Notice Period',  icon: Clock },
-  { label: 'Job Type',       icon: Briefcase },
-  { label: 'Industries',     icon: Building2 },
-  { label: 'Companies',      icon: Building2 },
-  { label: 'Skills',         icon: Sparkles },
-]
 
 // ── sub-components ────────────────────────────────────────────────────────────
 
@@ -322,7 +309,7 @@ export default function OnboardingWizard() {
     setIsSearchingJobs(true)
     toast.loading('Discovering jobs for you…', { id: 'job-search' })
     try {
-      const resp = await fetch('/local-api/jobs/search', {
+      const resp = await fetch(`${API_BASE}/jobs/search`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

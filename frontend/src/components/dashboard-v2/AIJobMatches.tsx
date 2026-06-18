@@ -1,4 +1,4 @@
-import { Sparkles, MapPin, Bookmark, ExternalLink, Briefcase, Zap, Clock } from 'lucide-react'
+import { Sparkles, MapPin, Bookmark, ExternalLink, Briefcase, Zap } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useOnboardingStore } from '../../store/onboardingStore'
 

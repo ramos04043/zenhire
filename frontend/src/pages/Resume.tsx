@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
-  Upload, Lock, Target, Lightbulb, CheckCircle,
+  Upload, Lock, Target,  CheckCircle,
   FileText, X, Loader2, AlertTriangle, ChevronRight, Briefcase, Sparkles
 } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
@@ -144,7 +144,7 @@ const ResumePage = () => {
                 { icon: Sparkles,     label: 'AI Analysis',     desc: 'Groq powered' },
                 { icon: Target,       label: 'Career Profile',  desc: '10-step wizard' },
                 { icon: Briefcase,    label: 'Live Jobs',       desc: 'Personalized matches' },
-              ].map(({ icon: Icon, label, desc }, i) => (
+              ].map(({ icon: Icon, label, desc }) => (
                 <div key={label} className="p-4 bg-dark-card border border-dark-border/50 rounded-xl text-center">
                   <div className="w-8 h-8 bg-dark-accent/10 rounded-lg flex items-center justify-center mx-auto mb-2">
                     <Icon size={16} className="text-dark-accent" />

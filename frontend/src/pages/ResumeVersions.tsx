@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { FileText, Clock, Download, Eye, Star, Plus } from 'lucide-react'
+import { FileText, Download, Eye, Star, Plus } from 'lucide-react'
 
 const ResumeVersions = () => {
   const versions = [

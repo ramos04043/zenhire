@@ -1,4 +1,4 @@
-import { Bell, User } from 'lucide-react'
+import { Bell } from 'lucide-react'
 
 interface TopBarProps {
   userName: string

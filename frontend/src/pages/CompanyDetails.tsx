@@ -3,7 +3,7 @@ import { useParams, useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   ArrowLeft, Building2, MapPin, Users, Globe, Linkedin, Twitter,
-  Star, Briefcase, TrendingUp, DollarSign, Award, Heart
+  Star, DollarSign, Award, Heart
 } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
 import toast from 'react-hot-toast'

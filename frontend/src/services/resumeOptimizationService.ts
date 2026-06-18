@@ -5,7 +5,7 @@
  * Swap provider by changing the backend endpoint — frontend code stays unchanged.
  */
 
-const API_BASE = '/local-api'
+import { API_BASE } from '../lib/api'
 
 export interface OptimizeRequest {
   parsed_resume: Record<string, any>
@@ -242,3 +242,4 @@ ${bodyLines.join('\n')}
 </body>
 </html>`
 }
+

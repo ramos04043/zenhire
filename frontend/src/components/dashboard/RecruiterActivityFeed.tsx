@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Eye, Download, Star, Calendar, Building2, TrendingUp } from 'lucide-react'
+import { Eye, Download, Star, Calendar, TrendingUp } from 'lucide-react'
 
 interface Activity {
   id: string

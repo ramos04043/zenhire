@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { 
-  Target, TrendingUp, Calendar, Users, 
+  Target, TrendingUp, Calendar,
   Sparkles, Award, Eye, Zap 
 } from 'lucide-react'
 import { Link } from 'react-router-dom'

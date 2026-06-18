@@ -1,5 +1,5 @@
 import DashboardLayout from '../components/DashboardLayout'
-import { Shield, Lock, Eye, EyeOff, Key, Smartphone } from 'lucide-react'
+import { Shield, Lock, Eye, Key, Smartphone } from 'lucide-react'
 
 const PrivacySecurity = () => {
   return (

@@ -2,19 +2,17 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
-  ArrowLeft, Briefcase, MapPin, DollarSign, Clock, Building2,
+  ArrowLeft, MapPin, DollarSign, Clock, Building2,
   Bookmark, Send, Share2, ExternalLink, CheckCircle, AlertCircle,
   TrendingUp, Users, Calendar, Zap
 } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
 import { useDataStore } from '../store/dataStore'
-import { useAuthStore } from '../store/authStore'
 import toast from 'react-hot-toast'
 
 const JobDetails = () => {
   const { id } = useParams()
   const navigate = useNavigate()
-  const { user } = useAuthStore()
   const [job, setJob] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [isSaved, setIsSaved] = useState(false)
@@ -63,7 +61,7 @@ const JobDetails = () => {
     }
 
     setJob(mockJob)
-    setIsSaved(savedJobs.some(j => j.job_id === id))
+    setIsSaved(savedJobs.some(j => j === id))
     
     // Mock similar jobs
     setSimilarJobs([

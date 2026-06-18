@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { MapPin, Target, CheckCircle, Circle, ArrowRight } from 'lucide-react'
+import { CheckCircle, Circle, ArrowRight } from 'lucide-react'
 import DashboardLayout from '../components/DashboardLayout'
 import { Link } from 'react-router-dom'
 

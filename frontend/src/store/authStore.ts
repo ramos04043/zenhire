@@ -54,7 +54,7 @@ export const useAuthStore = create<AuthState>((set) => ({
           zendbxService.getCurrentUserProfile(),
           zendbxService.getUserExtendedData(user.id),
         ])
-        const isComplete = !!(profile?.phone?.trim() && profile?.location?.trim() && profile?.title?.trim())
+        const isComplete = !!((profile?.phone as string)?.trim() && (profile?.location as string)?.trim() && (profile?.title as string)?.trim())
         if (isComplete) localStorage.setItem(`profile_complete_${user.id}`, 'true')
         set({ user: buildUser(user, profile, extendedData), isAuthenticated: true })
         toast.success('Welcome back!')
@@ -108,13 +108,15 @@ export const useAuthStore = create<AuthState>((set) => ({
             zendbxService.getCurrentUserProfile(),
             zendbxService.getUserExtendedData(session.user.id),
           ])
-          const isComplete = !!(profile?.phone && profile?.location && profile?.title)
+          const isComplete = !!((profile?.phone as string)?.trim() && (profile?.location as string)?.trim() && (profile?.title as string)?.trim())
           if (isComplete) localStorage.setItem(`profile_complete_${session.user.id}`, 'true')
           set({ user: buildUser(session.user, profile, extendedData, cachedStatus), isAuthenticated: true, isLoading: false })
         }
       })
 
-      const { data: { session }, error } = await zendbx.auth.getSession()
+      const result = await zendbx.auth.getSession()
+      const session = result?.data?.session
+      const error = (result as any)?.error
       const isActuallyAuthenticated = localStorage.getItem('zenhire_authenticated') === 'true'
 
       if (error && !isActuallyAuthenticated) {
@@ -125,13 +127,13 @@ export const useAuthStore = create<AuthState>((set) => ({
       if (session?.user) {
         localStorage.setItem('zenhire_authenticated', 'true')
         const cachedStatus = localStorage.getItem(`profile_complete_${session.user.id}`) === 'true'
-        const [profile, extendedData] = await Promise.all([
+        const [profile2, extendedData2] = await Promise.all([
           zendbxService.getCurrentUserProfile(),
           zendbxService.getUserExtendedData(session.user.id),
         ])
-        const isComplete = !!(profile?.phone && profile?.location && profile?.title)
-        if (isComplete) localStorage.setItem(`profile_complete_${session.user.id}`, 'true')
-        set({ user: buildUser(session.user, profile, extendedData, cachedStatus), isAuthenticated: true, isLoading: false })
+        const isComplete2 = !!((profile2?.phone as string)?.trim() && (profile2?.location as string)?.trim() && (profile2?.title as string)?.trim())
+        if (isComplete2) localStorage.setItem(`profile_complete_${session.user.id}`, 'true')
+        set({ user: buildUser(session.user, profile2, extendedData2, cachedStatus), isAuthenticated: true, isLoading: false })
       } else {
         set({ user: null, isAuthenticated: false, isLoading: false })
       }

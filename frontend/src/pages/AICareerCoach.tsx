@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import DashboardLayout from '../components/DashboardLayout'
-import { Brain, Send, Sparkles } from 'lucide-react'
+import { Brain, Send } from 'lucide-react'
 
 const AICareerCoach = () => {
-  const [messages, setMessages] = useState([
+  const [messages] = useState([
     { role: 'assistant', content: 'Hello! I\'m your AI Career Coach. How can I help you today?' },
   ])
 

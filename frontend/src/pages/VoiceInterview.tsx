@@ -1,3 +1,4 @@
+import { API_BASE } from '../lib/api'
 /**
  * VoiceInterview.tsx
  * Full-screen AI voice interview.
@@ -317,7 +318,7 @@ export default function VoiceInterview() {
   const startSession = async () => {
     setStage('loading')
     try {
-      const resp = await fetch('/local-api/interview-prep/voice-session', {
+      const resp = await fetch(`${API_BASE}/interview-prep/voice-session`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -361,7 +362,7 @@ export default function VoiceInterview() {
   // ── Evaluate full session ────────────────────────────────────────────────────
   const evaluateSession = async (allPairs: QAPair[], jobTitle: string) => {
     try {
-      const resp = await fetch('/local-api/interview-prep/voice-session/report', {
+      const resp = await fetch(`${API_BASE}/interview-prep/voice-session/report`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

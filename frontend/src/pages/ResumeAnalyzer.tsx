@@ -1,3 +1,4 @@
+import { API_BASE } from '../lib/api'
 import { useState, useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -202,7 +203,7 @@ const ResumeAnalyzer = () => {
     })
 
     try {
-      const resp = await fetch('/local-api/jobs/search-aggregated', {
+      const resp = await fetch(`${API_BASE}/jobs/search-aggregated`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

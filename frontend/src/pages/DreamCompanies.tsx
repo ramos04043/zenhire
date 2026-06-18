@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Heart, Star, TrendingUp, Users, DollarSign, MapPin, Briefcase, Bell, BellOff } from 'lucide-react';
-import api from '../lib/api';
-
+import { Star, TrendingUp, Users, DollarSign, MapPin, Briefcase, Bell, BellOff } from 'lucide-react';
+import { API_BASE } from '../lib/api';
 interface Company {
   name: string;
   logo_url: string;
@@ -37,13 +36,14 @@ const DreamCompanies: React.FC = () => {
   const loadCompanies = async () => {
     setLoading(true);
     try {
-      const params: any = {};
-      if (filter.industry !== 'all') params.industry = filter.industry;
-      if (filter.stage !== 'all') params.stage = filter.stage;
-      if (filter.ycOnly) params.yc_only = true;
+      const params = new URLSearchParams();
+      if (filter.industry !== 'all') params.set('industry', filter.industry);
+      if (filter.stage !== 'all') params.set('stage', filter.stage);
+      if (filter.ycOnly) params.set('yc_only', 'true');
 
-      const response = await api.get('/startup-jobs/dream-companies', { params });
-      setCompanies(response.data);
+      const response = await fetch(`${API_BASE}/startup-jobs/dream-companies?${params.toString()}`);
+      const data = await response.json();
+      setCompanies(data);
     } catch (error) {
       console.error('Error loading companies:', error);
     } finally {
@@ -53,9 +53,10 @@ const DreamCompanies: React.FC = () => {
 
   const loadFollowedCompanies = async () => {
     try {
-      const response = await api.get('/startup-jobs/dream-companies/following');
-      const followed = new Set(response.data.map((fc: any) => fc.company_name));
-      setFollowedCompanies(followed);
+      const response = await fetch(`${API_BASE}/startup-jobs/dream-companies/following`);
+      const data = await response.json();
+      const followed = new Set(data.map((fc: any) => fc.company_name as string));
+      setFollowedCompanies(followed as Set<string>);
     } catch (error) {
       console.error('Error loading followed companies:', error);
     }
@@ -64,14 +65,14 @@ const DreamCompanies: React.FC = () => {
   const toggleFollow = async (companyName: string) => {
     try {
       if (followedCompanies.has(companyName)) {
-        await api.delete(`/startup-jobs/dream-companies/${companyName}/unfollow`);
+        await fetch(`${API_BASE}/startup-jobs/dream-companies/${companyName}/unfollow`, { method: 'DELETE' });
         setFollowedCompanies(prev => {
           const next = new Set(prev);
           next.delete(companyName);
           return next;
         });
       } else {
-        await api.post(`/startup-jobs/dream-companies/${companyName}/follow`);
+        await fetch(`${API_BASE}/startup-jobs/dream-companies/${companyName}/follow`, { method: 'POST' });
         setFollowedCompanies(prev => new Set([...prev, companyName]));
       }
     } catch (error) {

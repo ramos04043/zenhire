@@ -1,39 +1,59 @@
 import { createClient } from '@zendbx/sdk'
 
-const projectId   = import.meta.env.VITE_ZENDBX_PROJECT_ID
-const projectSlug = import.meta.env.VITE_ZENDBX_PROJECT_SLUG
+// ── Config validation ─────────────────────────────────────────────────────────
 
-// Dev: /api-proxy (Vite proxies it) | Prod: full ZendBX URL via env var
-const apiUrl =
-  import.meta.env.VITE_ZENDBX_API_URL ||
-  `${typeof window !== 'undefined' ? window.location.origin : 'http://localhost:5173'}/api-proxy`
+const ZENDBX_URL      = import.meta.env.VITE_ZENDBX_URL
+const ZENDBX_ANON_KEY = import.meta.env.VITE_ZENDBX_ANON_KEY
+
+if (!ZENDBX_URL) {
+  throw new Error(
+    '[ZenHire] Missing VITE_ZENDBX_URL environment variable. ' +
+    'Set it to a full URL, e.g. https://api.zendbx.in'
+  )
+}
+
+if (!ZENDBX_ANON_KEY) {
+  throw new Error(
+    '[ZenHire] Missing VITE_ZENDBX_ANON_KEY environment variable.'
+  )
+}
+
+// Validate it is an absolute URL (starts with http:// or https://)
+if (!/^https?:\/\/.+/.test(ZENDBX_URL)) {
+  throw new Error(
+    `[ZenHire] Invalid ZendBX API URL: "${ZENDBX_URL}". ` +
+    'Expected a full URL such as https://api.zendbx.in'
+  )
+}
+
+// ── SDK client ────────────────────────────────────────────────────────────────
 
 export const zendbx = createClient({
-  apiUrl,
-  anonKey: import.meta.env.VITE_ZENDBX_ANON_KEY,
-  projectId,
-  projectSlug,
+  apiUrl:  ZENDBX_URL,
+  anonKey: ZENDBX_ANON_KEY,
 })
 
-// Database Tables
+// ── Database Tables ───────────────────────────────────────────────────────────
+
 export const TABLES = {
-  USERS: 'users',
-  PROFILES: 'profiles',
-  RESUMES: 'resumes',
-  SKILLS: 'skills',
-  EDUCATION: 'education',
-  EXPERIENCE: 'experience',
-  CERTIFICATIONS: 'certifications',
-  ATS_SCORES: 'ats_scores',
-  APPLICATIONS: 'applications',
+  USERS:                      'users',
+  PROFILES:                   'profiles',
+  RESUMES:                    'resumes',
+  SKILLS:                     'skills',
+  EDUCATION:                  'education',
+  EXPERIENCE:                 'experience',
+  CERTIFICATIONS:             'certifications',
+  ATS_SCORES:                 'ats_scores',
+  APPLICATIONS:               'applications',
   APPLICATION_STATUS_HISTORY: 'application_status_history',
-  JOBS: 'jobs',
-  SAVED_JOBS: 'saved_jobs',
-  NOTIFICATIONS: 'notifications',
-  SETTINGS: 'settings',
+  JOBS:                       'jobs',
+  SAVED_JOBS:                 'saved_jobs',
+  NOTIFICATIONS:              'notifications',
+  SETTINGS:                   'settings',
 } as const
 
-// Type Definitions
+// ── Type Definitions ──────────────────────────────────────────────────────────
+
 export interface User {
   id: string
   email: string
